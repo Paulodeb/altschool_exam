@@ -1,0 +1,36 @@
+.container {
+	min-height: 100vh;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.err{
+	font-weight: bold;
+	font-size:120px;
+	margin-bottom: 5px;
+}
+
+.pnf{
+	color: rgb(4, 4, 105);
+	font-weight: bold;
+	font-size: 20px;
+	margin-top: 2px;
+	
+  }
+
+  .pe{
+	margin-top: 0px;
+	font-weight: 10px;
+	font-weight: 400;
+	
+  }
+
+  .bck {
+		background-color: red;
+		color: white;
+		margin: 15px 0px 10px 0px;
+		border-radius: 5px;
+	  }

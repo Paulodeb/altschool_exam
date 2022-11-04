@@ -1,24 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { lazy, Suspense, useState } from "react";
+import { ErrorBoundary } from "react-error-boundary";
+// import User from "./components/Context/UserContext";
+import ErrorFallback from "./components/ErrorBoundary";
+import Navbar from "./components/Routes/Navbar";
+const IndexRoutes = lazy(() => import("./components/Routes/IndexRoutes" ));
+
+function Bomb() {
+  throw new Error('💥 CABOOM 💥')
+}
 
 function App() {
+  const [showBomb, setShowBomb] = useState(false)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <>
+      
+
+      <Navbar />
+      <button onClick={() => setShowBomb(e => !e)}>Show Bomb</button>
+     <ErrorBoundary
+       FallbackComponent={ErrorFallback}
+       onReset={() => 
+        setShowBomb(false)}
+        resetKeys={[showBomb]}
+
+
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+        {showBomb ? <Bomb /> : 
+
+      <Suspense fallback={<div>Loading...</div>}>
+      
+        <IndexRoutes />
+      </Suspense>}
+     </ErrorBoundary>
+      
+      
+    </>
   );
 }
 
