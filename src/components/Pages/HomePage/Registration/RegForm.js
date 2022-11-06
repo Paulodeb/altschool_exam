@@ -4,7 +4,7 @@ import { CurrentUserContext } from "../../../Context/AuthContext";
 import styles from "./RegPage.module.css";
 
 export function RegForm( ) {
-    const { setCurrentUser, setEmail, setPassword, setIsLoggedin } = useContext(CurrentUserContext);
+    const { setCurrentUser, setEmail, setPassword } = useContext(CurrentUserContext);
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [emailId, setEmailId] = useState("");

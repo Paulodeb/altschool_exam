@@ -26,6 +26,7 @@ const {setIsLoggedin} = useContext (CurrentUserContext)
         <NavLink to='/'>Home</NavLink>{''}
         <NavLink to='/Login'>Login</NavLink>
         <NavLink to='/Register'>Register</NavLink>
+         <NavLink to='/errorboundary'>Error Boundary</NavLink>
        
       </nav>
       )

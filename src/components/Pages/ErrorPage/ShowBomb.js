@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 import { Helmet } from 'react-helmet-async'
-import ErrorFallback from '../../ErrorBoundary'
 
 
 
@@ -13,7 +12,6 @@ function Bomb({username}){
 }
 
 function ShowBomb() {
-    const [bomb, setBomb] = useState(false)
     const [username, setUsername] = useState('')
     const usernameRef = useRef(null)
 
