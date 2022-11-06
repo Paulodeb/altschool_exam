@@ -1,13 +1,15 @@
 import React, { useContext, useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import { CurrentUserContext } from "../../../Context/AuthContext";
 import styles from "./RegPage.module.css";
 
 export function RegForm( ) {
-    const { setCurrentUser, setEmail, setPassword } = useContext(CurrentUserContext);
+    const { setCurrentUser, setEmail, setPassword, setIsLoggedin } = useContext(CurrentUserContext);
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [emailId, setEmailId] = useState("");
     const [passwordId, setPasswordId] = useState("");
+    let navigate = useNavigate()
     
   
     const canLogin = firstName !=="" && lastName !=="" && emailId !== "" && passwordId !== "";
@@ -65,11 +67,17 @@ export function RegForm( ) {
           setCurrentUser({ name: firstName + " " + lastName });
           setEmail({ email: emailId });
           setPassword({ password: passwordId });
+          setIsLoggedin(true)
+          navigate('/dashboard')
           
         }}>
           Sign Up
         </LoginButton>
         {!canLogin && <p>Please fill out all fields.</p>}
+        <div id={styles.last_name_label}>Already Registered?</div>
+        <button className={styles.btn}>
+          <NavLink to="/login">Login</NavLink>
+        </button>
       </div>
       </>
     )

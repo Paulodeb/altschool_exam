@@ -2,6 +2,8 @@ import React, { useRef, useState } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 import ErrorFallback from '../../ErrorBoundary'
 
+
+
 function Bomb({username}){
     if (username === 'error'){
         throw new Error('💥 CABOOM 💥')
@@ -13,8 +15,11 @@ function ShowBomb() {
     const [bomb, setBomb] = useState(false)
     const [username, setUsername] = useState('')
     const usernameRef = useRef(null)
-    
+
   return (
+
+      <>
+     {/* <Navbar user={isLoggedin}/> */}
       <ErrorBoundary
       FallbackComponent={ErrorFallback}
       onReset={() =>
@@ -35,6 +40,7 @@ function ShowBomb() {
       
     
     </ErrorBoundary>
+    </>
   )
 }
 

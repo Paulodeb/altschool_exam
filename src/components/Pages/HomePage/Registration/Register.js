@@ -1,41 +1,31 @@
-import React, { useContext } from "react";
-import { CurrentUserContext } from "../../../Context/AuthContext";
-import { Logout } from "../LoginPage/Logout";
+import React from "react";
 import styles from './RegPage.module.css'
 import { RegForm } from "./RegForm";
+import Navbar from "../../../Routes/Navbar";
 
 export default function Register() {
-    const { currentUser, email, password } = useContext(CurrentUserContext);
-    return (
+ 
+  return (
+    <>
+      <Navbar user={false} />
       <Panel title="Register">
-       { currentUser && email && password !== null ? 
-       <Greeting /> :
-       <RegForm />
-       }
-       {currentUser && email && password !== null && <Logout />}
+        
+          <RegForm />
+        
+       
       </Panel>
-    )
-  }
+    </>
+  )
+}
 
-  function Greeting() {
-    const { currentUser,  email} = useContext(CurrentUserContext);
-    return (
-      <div>
-      <h2>Welcome!!</h2>
-      <p>You logged in as {currentUser.name}.</p>
-      <p> Your email is {email.email}</p>
-      
-      </div>
-    )
-  }
 
- export function Panel({ title, children }) {
-    return (
-      <section className={styles.panel}>
-        <h1>{title}</h1>
-        {children}
-      </section>
-    )
-  }
-  
-  
+
+export function Panel({ title, children }) {
+  return (
+    <section className={styles.panel}>
+      <h1>{title}</h1>
+      {children}
+    </section>
+  )
+}
+

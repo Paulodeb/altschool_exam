@@ -1,10 +1,25 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { NavLink, Outlet } from "react-router-dom";
+import { CurrentUserContext } from '../Context/AuthContext';
+import Navbar from '../Routes/Navbar';
 
 
 const Dashboard = () => {
+	const { isLoggedin } = useContext(CurrentUserContext);
+
+
+
+
+
 	return (
 		<>
-				<h1>Dashboard</h1>
+			<Navbar user={isLoggedin} />
+			<h1>Welcome to AltSchool</h1>
+			<NavLink to='profile'>Profile</NavLink>
+
+			<Outlet />
+
+
 		</>
 	);
 };
