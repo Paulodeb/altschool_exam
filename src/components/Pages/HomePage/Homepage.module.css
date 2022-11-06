@@ -1,16 +1,19 @@
-#text_container{
+.text_container{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 1vh;
-    width: 10px;
+    
 }
 
 #hd1{
+    display: flex;
     font-size: 3rem;
     font-weight: 700;
     color: #fff;
     text-align: center;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 1rem;
 }
+

@@ -1,8 +1,7 @@
-import React, { useContext } from "react";
+import React  from "react";
 import { Route, Routes } from "react-router-dom";
 import {
-  AuthContextProvider,
-  CurrentUserContext
+  AuthContextProvider
 } from "../Context/AuthContext";
 import Dashboard from "../Pages/Dashboard";
 import ShowBomb from "../Pages/ErrorPage/ShowBomb";
@@ -19,13 +18,14 @@ export default function IndexRoutes() {
   return (
     <AuthContextProvider>
       <Routes>
-        <Route path="home" element={<HomePage />}>
-          <Route path="register" element={<Register />} />
-        </Route>
-        <Route path="login" element={<LoginPage />}>
+        <Route path="/" element={<HomePage />} />
+        <Route path="register" element={<Register />} />
+        <Route path="dashboard" element={<Dashboard />} >
           <Route path="greeting" element={<Greetings />} />
-          <Route path="user" element={<UserProfile />} />
+          <Route path="profile" element={<UserProfile />} />
+
         </Route>
+        <Route path="login" element={<LoginPage />}/>
         <Route path="errorboundary" element={<ShowBomb />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

@@ -10,8 +10,8 @@ export default function UserProfile() {
   
   return (
     <div>
-      <h1>User Profile</h1>
-      <div>Name : {currentUser.name}</div>
+      <h1>Your Profile</h1>
+      <div>Name : {currentUser.username || currentUser.name}</div>
       <div>Email : {email.email}</div>
       
     </div>

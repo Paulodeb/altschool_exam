@@ -12,21 +12,35 @@ import styles from './Navbar.module.css'
 //         ></NavLink>
 //     );
 //   };
-  const Navbar = () => {
-//  const {isLoggedin} = useContext(CurrentUserContext)
-//  console.log(isLoggedin)
+const Navbar = ({ user, currentUser }) => {
+const {setIsLoggedin} = useContext (CurrentUserContext)
   return (
     <header>
+      {user ? (
+         <nav className={styles.pry_nav}>
+          <p>{currentUser}</p>
+         <NavLink to='/dashboard'>Dashboard</NavLink>
+         <NavLink to='/'
+         onClick={()=>{
+          setIsLoggedin(false)
+         }}>Logout</NavLink>
+         <NavLink to='/errorboundary'>Error Boundary</NavLink>
+       </nav>
+      ):(
         <nav className={styles.pry_nav}>
-            <NavLink  to='home'>Home</NavLink>{''}
-            <NavLink  to='/dashboard'>Dashboard</NavLink>
-            {/* {isLoggedin? <NavLink  to='/'>Logout</NavLink>:  <NavLink  to='/login'>Login</NavLink>} */}
+        <NavLink to='/'>Home</NavLink>{''}
+        <NavLink to='/Login'>Login</NavLink>
+        <NavLink to='/Register'>Register</NavLink>
+       
+      </nav>
+      )
+      }
+    
 
-            
-            <NavLink  to='/errorboundary'>Error</NavLink>
-            <NavLink  to='/errorboundary'>Error Boundary</NavLink>
-        </nav>
+
     </header>
   )
 }
- export default Navbar
+export default Navbar
+
+ /* {isLoggedin? <NavLink  to='/'>Logout</NavLink>:  <NavLink  to='/login'>Login</NavLink>} */
