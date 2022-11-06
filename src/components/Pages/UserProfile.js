@@ -13,7 +13,7 @@ export default function UserProfile() {
       <h1>User Profile</h1>
       <div>Name : {currentUser.name}</div>
       <div>Email : {email.email}</div>
-      {/* <UserBio /> */}
+      
     </div>
   );
 }

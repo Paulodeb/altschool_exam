@@ -1,7 +1,8 @@
 import React, { useContext, useState } from "react";
 import { CurrentUserContext } from "../../../Context/AuthContext";
+import styles from "./RegPage.module.css";
 
-export function LoginForm( ) {
+export function RegForm( ) {
     const { setCurrentUser, setEmail, setPassword } = useContext(CurrentUserContext);
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -12,57 +13,71 @@ export function LoginForm( ) {
     const canLogin = firstName !=="" && lastName !=="" && emailId !== "" && passwordId !== "";
     return (
       <>
-       <label>
-          First Name:{' '}
+      <div id={styles.card_container}>
+        <form id={styles.form_container}>
+       <label
+       id={styles.first_name_label}
+       >
+          First Name
           <input
+          id={styles.first_name}
           required
             type="text"
             value={firstName}
             onChange={e => setFirstName(e.target.value)}
           />
         </label>
-        <label>
-          Last Name {': '}
+        <label
+        id={styles.last_name_label}>
+          Last Name 
           <input
+          id={styles.last_name}
           required
             type="text"
             value={lastName}
             onChange={e => setLastName(e.target.value)}
           />
         </label>
-        <label>
-          Email {': '}
+        <label
+        id={styles.email_label}>
+          Email 
           <input
+          id={styles.email}
           required
             type="email"
             value={emailId}
             onChange={e => setEmailId(e.target.value)}
           />  
         </label>
-        <label>
-          Password {': '}
+        <label
+        id={styles.password_label}>
+          Password 
           <input
+          id={styles.password}
           required
             type="password"
             value={passwordId}
             onChange={e => setPasswordId(e.target.value)}
           />
         </label>
-        <Button disabled={!canLogin} onClick={() => {
+        </form>
+        <LoginButton disabled={!canLogin} onClick={() => {
           setCurrentUser({ name: firstName + " " + lastName });
           setEmail({ email: emailId });
           setPassword({ password: passwordId });
+          
         }}>
-          Log in
-        </Button>
+          Sign Up
+        </LoginButton>
         {!canLogin && <p>Please fill out all fields.</p>}
+      </div>
       </>
     )
   }
 
- export function Button({ children, onClick, disabled }) {
+ export function LoginButton({ children, onClick, disabled }) {
     return (
-      <button className="button" onClick={onClick} disabled={disabled}>
+      <button className={styles.btn} onClick={onClick} disabled={disabled}>
         {children}
       </button>
     )

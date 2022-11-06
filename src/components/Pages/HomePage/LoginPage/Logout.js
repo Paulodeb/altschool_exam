@@ -1,20 +1,22 @@
 import React, { useContext } from "react";
 import { CurrentUserContext } from "../../../Context/AuthContext";
-import { Button } from "./LoginForm";
+import { LoginButton } from "../Registration/RegForm";
 
-export function Logout() {
+
+export  function Logout() {
     const { setCurrentUser, setEmail, setPassword } = useContext(CurrentUserContext);
     return (
-      <Button
+      <LoginButton
         onClick={() => {
           setCurrentUser(null);
           setEmail(null);
           setPassword(null);
+          
   
         }}
       >
         Logout
-      </Button>
+      </LoginButton>
     )
   }
   

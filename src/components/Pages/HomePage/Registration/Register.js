@@ -1,15 +1,16 @@
 import React, { useContext } from "react";
 import { CurrentUserContext } from "../../../Context/AuthContext";
-import { LoginForm } from "./LoginForm";
-import { Logout } from "./Logout";
+import { Logout } from "../LoginPage/Logout";
+import styles from './RegPage.module.css'
+import { RegForm } from "./RegForm";
 
-export default function Login() {
+export default function Register() {
     const { currentUser, email, password } = useContext(CurrentUserContext);
     return (
-      <Panel title="Login">
+      <Panel title="Register">
        { currentUser && email && password !== null ? 
        <Greeting /> :
-       <LoginForm />
+       <RegForm />
        }
        {currentUser && email && password !== null && <Logout />}
       </Panel>
@@ -20,6 +21,7 @@ export default function Login() {
     const { currentUser,  email} = useContext(CurrentUserContext);
     return (
       <div>
+      <h2>Welcome!!</h2>
       <p>You logged in as {currentUser.name}.</p>
       <p> Your email is {email.email}</p>
       
@@ -27,9 +29,9 @@ export default function Login() {
     )
   }
 
-  function Panel({ title, children }) {
+ export function Panel({ title, children }) {
     return (
-      <section className="panel">
+      <section className={styles.panel}>
         <h1>{title}</h1>
         {children}
       </section>

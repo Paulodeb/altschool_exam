@@ -9,7 +9,7 @@ function NotFound() {
         <h1 className={styles.err}>404</h1>
         <p className={styles.pnf}>PAGE NOT FOUND</p>
         <span className={styles.pe}>PAGE EXPIRED</span>
-        <button className={styles.bck} onClick={()=> navigate('/')}>GO BACK</button>
+        <button className={styles.bck} onClick={()=> navigate('/home')}>GO BACK</button>
     </div>
     )
 }
