@@ -11,8 +11,11 @@ import UserProfile from '../../UserProfile';
 import Greetings from '../../Greetings';
 
 function LoginPage() {
-  const {currentUser,  email, password} = useContext(CurrentUserContext);
+  const {currentUser,  email, password, setIsLoggedin, isLoggedIn} = useContext(CurrentUserContext);
+  if(currentUser){setIsLoggedin(true)}
   
+
+
   return (
     <div>
         <Panel>

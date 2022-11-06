@@ -20,7 +20,7 @@ import styles from './Navbar.module.css'
         <nav className={styles.pry_nav}>
             <NavLink  to='home'>Home</NavLink>{''}
             <NavLink  to='/dashboard'>Dashboard</NavLink>
-            {/* {isLoggedin? <NavLink  to='/'>Logout</NavLink>:  <NavLink  to='/login'>Login</NavLink>} */}
+           <NavLink  to='/login'>Login</NavLink>
 
             
             <NavLink  to='/errorboundary'>Error</NavLink>

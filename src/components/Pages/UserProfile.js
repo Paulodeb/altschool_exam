@@ -1,7 +1,5 @@
 import React, { useContext } from "react";
 import { CurrentUserContext } from "../Context/AuthContext";
-// import { AuthContext } from "../Context/AuthContext";
-// import UserBio from "./UserBio";
 
 
 export default function UserProfile() {

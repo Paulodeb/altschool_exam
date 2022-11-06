@@ -10,8 +10,8 @@ export function AuthContextProvider({children}) {
   const [currentUser, setCurrentUser] = useState(null);
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
-  const [isLoggedin, setIsLoggedin] = useState(false)
-  
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+
   return (
     
     <CurrentUserContext.Provider
@@ -23,8 +23,8 @@ export function AuthContextProvider({children}) {
         setEmail,
         password,
         setPassword,
-        isLoggedin,
-        setIsLoggedin,
+        isLoggedIn,
+        setIsLoggedIn,
       }}>
       {children}
       </CurrentUserContext.Provider>
