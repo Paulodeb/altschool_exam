@@ -67,7 +67,7 @@ export function RegForm( ) {
           setCurrentUser({ name: firstName + " " + lastName });
           setEmail({ email: emailId });
           setPassword({ password: passwordId });
-          setIsLoggedin(true)
+          
           navigate('/dashboard')
           
         }}>

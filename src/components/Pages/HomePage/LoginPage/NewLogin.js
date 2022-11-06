@@ -12,6 +12,7 @@ function NewLogin() {
   const { setCurrentUser, setEmail, setPassword, setIsLoggedin } = useContext(
     CurrentUserContext
   );
+  console.log(setIsLoggedin)
   const { handleChange, values, errors } = useForm(NewLogin);
   const canLogin =
     values.username === "altschool" &&
@@ -24,7 +25,12 @@ function NewLogin() {
         <label>
           <h1 id={styles.title}>Login</h1>
           {!canLogin && <p id={styles.password_label}>Please fill out all fields.</p>}
-       
+       <div id={styles.details}>
+       Login details: <br/>
+       username: altschool <br/>
+       password: altschool <br/>
+       email: altschool@gmail
+       </div>
         </label>
         <label id={styles.username_label}>
           Username
@@ -64,7 +70,7 @@ function NewLogin() {
             setCurrentUser({ username: values.username });
             setEmail({ email: values.email });
             setPassword({ password: values.password });
-            setIsLoggedin(true)
+            
             navigate('/dashboard')
           
           }}

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Helmet } from 'react-helmet-async'
 import { useNavigate } from 'react-router-dom'
 import Navbar from '../../Routes/Navbar'
 import styles from './notfound.module.css'
@@ -7,7 +8,11 @@ function NotFound() {
     let navigate = useNavigate()
   return (
     <>
-    
+   <Helmet>
+            <title>Home</title>
+            <meta name="description" content="Home page" />
+            <link rel="canonical" href="/" />
+        </Helmet> 
    
     <Navbar user={false}/>
     <div className={styles.container}>

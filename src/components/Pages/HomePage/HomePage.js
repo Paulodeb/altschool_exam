@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { NavLink, Outlet } from 'react-router-dom';
 import Navbar from '../../Routes/Navbar';
 import styles from './Homepage.module.css';
@@ -11,6 +12,12 @@ import styles from './Homepage.module.css';
     
     return (
         
+        <>
+        <Helmet>
+            <title>Home</title>
+            <meta name="description" content="Home page" />
+            <link rel="canonical" href="/" />
+        </Helmet>
         <div>
             <Navbar user={false}/>
             <div className={styles.text_container}>
@@ -25,6 +32,7 @@ import styles from './Homepage.module.css';
             </div>
             <Outlet/>
         </div>
+        </>
     );
 }
 

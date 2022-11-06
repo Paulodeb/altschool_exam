@@ -4,12 +4,18 @@ import { CurrentUserContext } from '../../../Context/AuthContext';
 import { Panel } from '../Registration/Register';
 import NewLogin from './NewLogin';
 import Navbar from '../../../Routes/Navbar';
+import { Helmet } from 'react-helmet-async';
 
 function LoginPage() {
   const {currentUser,  email, password} = useContext(CurrentUserContext);
   
   return (
     <div>
+    <Helmet>
+            <title>Login</title>
+            <meta name="description" content="Login" />
+            <link rel="canonical" href="/login" />
+        </Helmet>
       <Navbar user={false}/>
       <Panel>
 

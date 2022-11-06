@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
+import { Helmet } from 'react-helmet-async'
 import ErrorFallback from '../../ErrorBoundary'
 
 
@@ -19,14 +20,15 @@ function ShowBomb() {
   return (
 
       <>
-     {/* <Navbar user={isLoggedin}/> */}
-      <ErrorBoundary
-      FallbackComponent={ErrorFallback}
-      onReset={() =>
-      setBomb(false)}
-      resetKeys={[bomb]}
-    >
-     <label>
+     <Helmet>
+            <title>ErrorBoundary</title>
+            <meta name="description" content="Error Boundary" />
+            <link rel="canonical" href="/errorboundary" />
+        </Helmet>
+      <ErrorBoundary>
+      <div className='container'>
+
+     <label className='label_container'>
         {`Name (don't type "error"): `}
         <input
           placeholder={`type "error"`}
@@ -35,6 +37,7 @@ function ShowBomb() {
           ref={usernameRef}
         />
       </label>
+      </div>
 
       <Bomb username={username}/>
       
