@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { NavLink, Outlet } from "react-router-dom";
 import { CurrentUserContext } from "../Context/AuthContext";
 import Navbar from "../Routes/Navbar";
+import styles from "./userprofile.module.css";
 
 
 export default function Greetings() {
@@ -15,7 +16,7 @@ export default function Greetings() {
             <link rel="canonical" href="/" />
         </Helmet>
         <Navbar user={currentUser} />
-      <div>
+      <div className={styles.container}>
       <p>Welcome back {currentUser.username}.</p> 
       <nav>
 

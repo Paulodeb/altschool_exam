@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { CurrentUserContext } from "../Context/AuthContext";
-import styles from "./userprofile.css"
+import styles from "./userprofile.module.css"
 
 export default function UserProfile() {
   const { currentUser, email} = useContext(CurrentUserContext);

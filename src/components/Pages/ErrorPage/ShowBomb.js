@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 import { Helmet } from 'react-helmet-async'
+import styles from './showbomb.module.css'
 
 
 
@@ -24,9 +25,10 @@ function ShowBomb() {
             <link rel="canonical" href="/errorboundary" />
         </Helmet>
       <ErrorBoundary>
-      <div className='container'>
+      <div className={styles.container}>
+          <h1 className={styles.text}>Error Boundary</h1>
 
-     <label className='label_container'>
+     <label className={styles.label_container}>
         {`Name (don't type "error"): `}
         <input
           placeholder={`type "error"`}
