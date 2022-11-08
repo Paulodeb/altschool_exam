@@ -9,17 +9,6 @@ const useForm = (callback) => {
     const validate = (event, name, value) => {
 
         switch (name) {
-            case "username":
-                if (value.length <= 4) {
-                    // we will set the error state
-
-                    setErrors({
-                        ...errors,
-                        username: 'Username atleast have 5 letters'
-                    })
-                }
-
-                break;
             case "email":
 
                 if (

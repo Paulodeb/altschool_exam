@@ -1,50 +1,40 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 
-// import { Login } from "../Pages/HomePage/LoginPage/Login";
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+const AuthContext = createContext({});
 
-export const CurrentUserContext = createContext(null);
-
-export function AuthContextProvider({children}) {
-
+export const AuthContextProvider = (props) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [LoggedIn, setLoggedIn] = useState(false);
 
-  return (
-    
-    <CurrentUserContext.Provider
-    value={{
+  const login = () => {
+    sleep(100).then(() => {
+      setLoggedIn(true);
+    });
+  };
+  const logout = () => {
+    sleep(100).then(() => {
+      setLoggedIn(false);
+    });
+  };
 
-        currentUser,
-        setCurrentUser,
-        email,
-        setEmail,
-        password,
-        setPassword,
-        isLoggedIn,
-        setIsLoggedIn,
-      }}>
-      {children}
-      </CurrentUserContext.Provider>
-  )
-}
+  const authContextValue = {
+    currentUser,
+    setCurrentUser,
+    email,
+    setEmail,
+    password,
+    setPassword,
+    login,
+    logout,
+    LoggedIn
+  };
 
-// export default function Userdetails() {
-//   return (
-//     <AuthContextProvider>
-//   <Login />
-//   </AuthContextProvider>
-//   )
-// }
+  return <AuthContext.Provider value={authContextValue} {...props} />;
+};
 
-
-
-
-
-
-  
-
-
+export const useAuth = () => useContext(AuthContext);
 

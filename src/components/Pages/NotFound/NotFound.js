@@ -1,7 +1,6 @@
 import React from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useNavigate } from 'react-router-dom'
-import Navbar from '../../Routes/Navbar'
 import styles from './notfound.module.css'
 
 function NotFound() {
@@ -13,8 +12,6 @@ function NotFound() {
             <meta name="description" content="Home page" />
             <link rel="canonical" href="/" />
         </Helmet> 
-   
-    <Navbar user={false}/>
     <div className={styles.container}>
         <h1 className={styles.err}>404</h1>
         <p className={styles.pnf}>PAGE NOT FOUND</p>

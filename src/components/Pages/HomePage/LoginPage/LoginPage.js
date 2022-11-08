@@ -1,52 +1,29 @@
-import React, { useContext } from 'react';
-import { LoginButton } from '../Registration/RegForm';
-import { CurrentUserContext } from '../../../Context/AuthContext';
-import { Panel } from '../Registration/Register';
-import NewLogin from './NewLogin';
-import Navbar from '../../../Routes/Navbar';
-import { Helmet } from 'react-helmet-async';
+import React from "react";
+import { useAuth } from "../../../Context/AuthContext";
+import { Panel } from "../Registration/Register";
+import NewLogin from "./NewLogin";
+import { Helmet } from "react-helmet-async";
 
 function LoginPage() {
-  const {currentUser,  email, password} = useContext(CurrentUserContext);
-  
-  return (
+  const { LoggedIn } = useAuth();
+
+  return !LoggedIn ? (
     <div>
-    <Helmet>
-            <title>Login</title>
-            <meta name="description" content="Login" />
-            <link rel="canonical" href="/login" />
-        </Helmet>
-      <Navbar user={false}/>
+      <Helmet>
+        <title>Login</title>
+        <meta name="description" content="Login" />
+        <link rel="canonical" href="/login" />
+      </Helmet>
+
       <Panel>
-
         <NewLogin />
-
-        {currentUser && email && password !== null && <LoginLogOut />}
       </Panel>
-
     </div>
-  )
+  ) : (
+    <div>
+      <h3>You are logged in</h3>
+    </div>
+  );
 }
 
-
-export const LoginLogOut = () => {
-  const { setCurrentUser, setEmail, setPassword, setIsLoggedin } = useContext(CurrentUserContext);
-  return (
-    <LoginButton
-      onClick={() => {
-        setCurrentUser(null);
-        setEmail(null);
-        setPassword(null);
-        setIsLoggedin(true)
-      }}
-    >
-      Logout
-    </LoginButton>
-
-  )
-}
-
-
-
-
-export default LoginPage
+export default LoginPage;

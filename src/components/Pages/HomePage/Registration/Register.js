@@ -1,30 +1,28 @@
 import React from "react";
-import styles from './RegPage.module.css'
+import styles from "./RegPage.module.css";
 import { RegForm } from "./RegForm";
-import Navbar from "../../../Routes/Navbar";
 import { Helmet } from "react-helmet-async";
+import { useAuth } from "../../../Context/AuthContext";
 
 export default function Register() {
- 
-  return (
+  const { LoggedIn } = useAuth();
+  return !LoggedIn ? (
     <>
-    <Helmet>
-            <title>Register</title>
-            <meta name="description" content="Register" />
-            <link rel="canonical" href="/register" />
-        </Helmet>
-      <Navbar user={false} />
-      <Panel title="Register">
-        
-          <RegForm />
-        
-       
+      <Helmet>
+        <title>Register</title>
+        <meta name="description" content="Register" />
+        <link rel="canonical" href="/register" />
+      </Helmet>
+      <Panel>
+        <RegForm />
       </Panel>
     </>
-  )
+  ) : (
+    <div>
+      <h3>You are logged in</h3>
+    </div>
+  );
 }
-
-
 
 export function Panel({ title, children }) {
   return (
@@ -32,6 +30,5 @@ export function Panel({ title, children }) {
       <h1>{title}</h1>
       {children}
     </section>
-  )
+  );
 }
-
