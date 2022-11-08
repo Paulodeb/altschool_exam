@@ -1,6 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext";
 import NotFound from "./NotFound/NotFound";
 import styles from "./userprofile.module.css";
@@ -11,15 +11,14 @@ export default function Greetings() {
     <>
       <Helmet>
         <title>Home</title>
-        <meta name="description" content="Home page" />
-        <link rel="canonical" href="/" />
+        <meta name="description" content="Welcome to Dashboard" />
+        <link rel="canonical" href="/dashboard" />
       </Helmet>
       <div className={styles.container}>
-        <p>Welcome back {currentUser.username || currentUser.name}.</p>
+        <p>Welcome {currentUser.username || currentUser.name}, to Altschool.</p>
         <nav>
           <NavLink to="profile">Profile</NavLink>
         </nav>
-        <Outlet />
       </div>
     </>
   ) : (

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../Context/AuthContext";
 import useForm from "../../../Hooks/useForm";
@@ -7,13 +7,15 @@ import styles from "./RegPage.module.css";
 export function RegForm() {
   const { login, setCurrentUser, setEmail, setPassword } = useAuth();
   const { handleChange, values } = useForm(RegForm);
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName]  = useState('')
   let navigate = useNavigate();
 
   const canLogin =
-    values.firstName !== "" &&
-    values.lastName !== "" &&
-    values.emailId !== "" &&
-    values.passwordId !== "";
+    firstName !== "" &&
+    lastName !== "" &&
+    values.email !== "" &&
+    values.password !== "";
   return (
     <>
       <div id={styles.card_container}>
@@ -32,7 +34,8 @@ export function RegForm() {
               type="text"
               name="firstname"
               placeholder="First name"
-              onChange={handleChange}
+              value={firstName}
+              onChange={e => setFirstName(e.target.value)}
             />
           </label>
           <label id={styles.last_name_label}>
@@ -42,8 +45,9 @@ export function RegForm() {
               required
               type="text"
               name="lastname"
+              value={lastName}
               placeholder="Last name"
-              onChange={handleChange}
+              onChange={e => setLastName(e.target.value)}
             />
           </label>
           <label id={styles.email_label}>
@@ -72,11 +76,11 @@ export function RegForm() {
         <LoginButton
           disabled={!canLogin}
           onClick={() => {
-            setCurrentUser({ name: values.firstName + " " + values.lastName });
-            setEmail({ email: values.emailId });
-            setPassword({ password: values.passwordId });
-            login();
+            setCurrentUser({ name: firstName + " " + lastName  });
+            setEmail({ email: values.email });
+            setPassword({ password: values.password });
             navigate("/dashboard");
+            login();
           }}
         >
           Sign Up

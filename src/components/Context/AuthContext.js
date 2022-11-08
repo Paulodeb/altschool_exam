@@ -5,9 +5,9 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const AuthContext = createContext({});
 
 export const AuthContextProvider = (props) => {
-  const [currentUser, setCurrentUser] = useState(null);
-  const [email, setEmail] = useState(null);
-  const [password, setPassword] = useState(null);
+  const [currentUser, setCurrentUser] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [LoggedIn, setLoggedIn] = useState(false);
 
   const login = () => {
