@@ -1,19 +1,24 @@
+import { Card, CardContent, Typography } from "@mui/material";
 import React from "react";
 import { useAuth } from "../Context/AuthContext";
 import NotFound from "./NotFound/NotFound";
-import styles from "./userprofile.module.css";
+import styles from "./userprofile.css";
 
 export default function UserProfile() {
   const { currentUser, email, LoggedIn } = useAuth();
-
+  
   return LoggedIn ? (
-    <div className={styles.container}>
-      <h1 className={styles.text1}>Your Profile</h1>
-      <div className={styles.text2}>
+    <Card sx={{minWidth: 275}}>
+
+    <CardContent>
+      <Typography sx={{fontSize: 14}} color='text.secondary' gutterBottom>Your Profile</Typography>
+      <Typography >
         Name : {currentUser.username || currentUser.name}
-      </div>
+      </Typography>
       <div className={styles.text3}>Email : {email.email}</div>
-    </div>
+    </CardContent>
+    
+    </Card>
   ) : (
     <>
       <NotFound />

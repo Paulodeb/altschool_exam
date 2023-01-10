@@ -1,10 +1,12 @@
+import { Card, TextField, Typography } from '@mui/material'
+import { Box } from '@mui/system'
 import React, { useRef, useState } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 import { Helmet } from 'react-helmet-async'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../Context/AuthContext'
 import NotFound from '../NotFound/NotFound'
-import styles from './showbomb.module.css'
+
 
 export const ErrorFallback = ({error, resetErrorBoundary}) => {
   return (
@@ -29,6 +31,18 @@ function ShowBomb() {
     const usernameRef = useRef(null)
     let navigate = useNavigate()
 
+    const modalStyles = {
+      inputFields: {
+        display: "flex",
+        flexDirection: "column",
+        marginTop: "20px",
+        marginBottom: "15px",
+        ".MuiFormControl-root": {
+          marginBottom: "10px"
+        }
+      }
+    };
+
   return LoggedIn ? (
       <>
      <Helmet>
@@ -38,19 +52,23 @@ function ShowBomb() {
         </Helmet>
       <ErrorBoundary FallbackComponent={ErrorFallback}
       onReset= {() => {navigate('/')}}>
-      <div className={styles.container}>
-          <h1 className={styles.text}>Error Boundary</h1>
+      <Box sx={modalStyles.inputFields}>
+      <Card sx= {{ minWidth: 275, maxWidth: 500, align: "center" }}>
 
-     <label className={styles.label_container}>
-        {`Name (don't type "error"): `}
-        <input
+          <Typography align='center'>Error Boundary</Typography>
+
+     
+        
+        <TextField
+          label={`Name (don't type "error")`}
           placeholder={`type "error"`}
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           ref={usernameRef}
         />
-      </label>
-      </div>
+     
+      </Card>
+      </Box>
 
       <Bomb username={username}/>
       

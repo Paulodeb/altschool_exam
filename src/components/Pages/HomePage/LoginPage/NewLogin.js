@@ -1,82 +1,183 @@
-import React from "react";
+import React, { useState } from "react";
 import { useAuth } from "../../../Context/AuthContext";
-import useForm from "../../../Hooks/useForm";
 import { LoginButton } from "../Registration/RegForm";
-import styles from "./LoginPage.module.css";
-import { NavLink } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import NewUserModal from "../../../common/BasicModal/NewUserModal";
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import {Box, TextField, IconButton, FormControl, InputLabel, OutlinedInput, InputAdornment, 
+  Card, CardContent, CardActions, Typography, Button} from '@mui/material';
+import { userDetails } from "./userDetails";
 
 function NewLogin() {
-  const { login, setCurrentUser, setEmail, setPassword } = useAuth();
-  const { handleChange, values } = useForm(NewLogin);
+  const modalStyles = {
+    inputFields: {
+      display: "flex",
+      flexDirection: "column",
+      marginTop: "20px",
+      marginBottom: "15px",
+      ".MuiFormControl-root": {
+        marginBottom: "10px"
+      }
+    }
+  };
+
+  const [open, setOpen] = useState(false);
+  const [showPassword, setShowPassword] = useState(false)
+  const [userName, setUserName] = useState('')
+  const { login, setCurrentUser, setEmail, setPassword, password, email } = useAuth();
+  // const { handleChange, values } = useFormHook(NewLogin);
   let navigate = useNavigate();
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
+  // const validationSchema = Yup.object().shape({
+  //   userName: Yup.string()
+  //   .required('Please enter your username')
+  //   .min(6, "userName must be at least 6 characters"),
+  //   email: Yup.string()
+  //   .required('Please enter your email')
+  //   .email('Please enter a valid email'),
+  //   password: Yup.string()
+  //   .required('Please enter your password')
+  //   .min(6, "password must be at least 6 characters"),
+  // });
+
+  // const {
+  //   register,
+  //   handleSubmit,
+  //   formState: { errors },
+  // } = useForm({
+  //   resolver: yupResolver(validationSchema),
+  // })
+
+  // const addUser = (data) => {
+  //   console.log(data);
+  // };
+
+
+
   const canLogin =
-    values.username === "altschool" &&
-    values.password === "altschool" &&
-    values.email === "altschool@gmail.com";
+  userDetails.find((value) => value.username === userName && value.password === password && value.email === email) 
+    
   return (
-    <div id={styles.card_container}>
-      <form id={styles.form_container}>
-        <label>
-          <h1 id={styles.title}>Login</h1>
+    <Card sx= {{ minWidth: 275 }}>
+      <CardContent>
+      <Box sx={modalStyles.inputFields}>
+        <Box>
+
+        <Typography gutterBottom variant="h5" component='div' align="center">
+          Login
+        </Typography>
           {!canLogin && (
-            <p id={styles.password_label}>Please fill out all fields.</p>
+            <Typography variant='body1' color='text.secondary'>
+            Please fill out all fields.
+            </Typography>
           )}
-          <div id={styles.details}>
+        </Box>
+      <CardActions>
+            <Typography variant='body1' color='text.secondary' align="center">
             Login details: <br />
             username: altschool <br />
             password: altschool <br />
             email: altschool@gmail
-          </div>
-        </label>
-        <label id={styles.username_label}>
-          Username
-          <input
-            id={styles.username}
-            type="text"
+            </Typography>
+          
+          </CardActions>
+        <FormControl fullWidth  variant="outlined">
+          <TextField
+            label='Username'
             name="username"
             placeholder="username"
-            onChange={handleChange}
+            value={userName}
+            onChange={e=> setUserName(e.target.value)}
+
+            required
+            // {...register('userName')}
+            // error={errors.userName ? true : false}
+            // helperText={errors.userName === true ? "Kindly enter your username" : null }
           />
-        </label>
-        <label id={styles.email_label}>
-          Email
-          <input
-            id={styles.email}
-            type="email"
+          
+        </FormControl>
+        
+        <FormControl fullWidth variant="outlined">
+
+          <TextField
             name="email"
+            label='E-mail'
+            type="email"
             placeholder="E-mail"
-            onChange={handleChange}
+            value={email}
+            onChange={e=> setEmail(e.target.value)}
+            required
+            // {...register('email')}
+            // error={errors.email ? true : false}
+            // helperText={errors.email === true ? "Kindly enter your email" : null }
           />
-        </label>
-        <label id={styles.password_label}>
-          Password
-          <input
-            id={styles.password}
-            type="password"
+        </FormControl>
+      
+      <FormControl fullWidth variant="outlined">
+          <InputLabel htmlFor="outlined-adornment-password"
+              placeholder="password"
+              required
+          >Password</InputLabel>
+          <OutlinedInput
+            id="outlined-adornment-password"
+            type={showPassword ? 'text' : 'password'}
             name="password"
             placeholder="password"
-            onChange={handleChange}
+            value={password}
+            onChange={e=> setPassword(e.target.value)}
+            label="Password"
+
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
           />
-        </label>
+        </FormControl>
+        
+        {/* <button
+          onClick={(e) => {
+            setOpen(true);
+            e.preventDefault();
+          }}
+        >jhh</button> */}
         <LoginButton
           disabled={!canLogin}
           onClick={() => {
-            setCurrentUser({ username: values.username });
-            setEmail({ email: values.email });
-            setPassword({ password: values.password });
+            
+            setCurrentUser({ name: userName });
+            setEmail({ email: email });
+            setPassword({ password: password });
             navigate("/dashboard");
             login();
           }}
         >
           Log in
         </LoginButton>
-        <div id={styles.password_label}>Not Registered?</div>
-        <button className={styles.btn}>
-          <NavLink to="/register">Register</NavLink>
-        </button>
-      </form>
-    </div>
+        <CardActions>
+        <Typography variant='subtitle1' color='text.secondary' align="center" >Not Registered?</Typography>
+        <Button variant="outlined" size="small" >
+          <NavLink to="/register">Sign Up</NavLink>
+        </Button>
+        <NewUserModal open={open} onClose={() => setOpen(false)} />
+        </CardActions>
+      </Box>
+      </CardContent>
+    </Card>
   );
 }
 

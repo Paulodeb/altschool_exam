@@ -40,10 +40,10 @@ function HomePage() {
             Earn a Diploma in alt-school africa today.
           </p>
 
-          <nav>
+          <div>
             <NavLink to="register">Join Us</NavLink>
             {""}
-          </nav>
+          </div>
         </div>
         <Outlet />
       </div>

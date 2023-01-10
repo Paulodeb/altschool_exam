@@ -1,84 +1,121 @@
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { Box, Button, Card, CardActions, CardContent, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../Context/AuthContext";
-import useForm from "../../../Hooks/useForm";
-import styles from "./RegPage.module.css";
+
+
 
 export function RegForm() {
-  const { login, setCurrentUser, setEmail, setPassword } = useAuth();
-  const { handleChange, values } = useForm(RegForm);
+  const { login, setCurrentUser, setEmail, email} = useAuth();
+
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName]  = useState('')
+  // const [email, setEmail]  = useState('')
+  const [password, setPassword]  = useState('')
+  const [showPassword, setShowPassword] = useState(false)
   let navigate = useNavigate();
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
+  const modalStyles = {
+    inputFields: {
+      display: "flex",
+      flexDirection: "column",
+      marginTop: "20px",
+      marginBottom: "15px",
+      ".MuiFormControl-root": {
+        marginBottom: "10px"
+      }
+    }
+  };
+
 
   const canLogin =
     firstName !== "" &&
     lastName !== "" &&
-    values.email !== "" &&
-    values.password !== "";
+    email !== "" &&
+    password !== "";
   return (
     <>
-      <div id={styles.card_container}>
-        <form id={styles.form_container}>
-          <label>
-            <h1 id={styles.title}>Register</h1>
-            {!canLogin && (
-              <p id={styles.password_label}>Please fill out all fields.</p>
-            )}
-          </label>
-          <label id={styles.first_name_label}>
-            First Name
-            <input
-              id={styles.first_name}
+      <Card sx={{ minWidth: 275 }}>
+        <CardContent>
+          <Box sx={modalStyles.inputFields}>
+          <Box>
+
+            <Typography gutterBottom variant="h5" align="center" component='div'>Register</Typography>
+            
+          </Box>
+          <FormControl fullWidth variant='outlined'>
+            <TextField
+              label='First Name'
               required
-              type="text"
               name="firstname"
-              placeholder="First name"
+              placeholder="First Name"
               value={firstName}
               onChange={e => setFirstName(e.target.value)}
             />
-          </label>
-          <label id={styles.last_name_label}>
-            Last Name
-            <input
-              id={styles.last_name}
+          </FormControl>
+          <FormControl fullWidth variant="outlined">
+            <TextField
+              label='Last Name'
               required
-              type="text"
               name="lastname"
               value={lastName}
-              placeholder="Last name"
+              placeholder="Last Name"
               onChange={e => setLastName(e.target.value)}
             />
-          </label>
-          <label id={styles.email_label}>
-            Email
-            <input
-              id={styles.email}
+          </FormControl>
+
+          <FormControl fullWidth variant="outlined">
+            <TextField
+              label='E-mail'
               required
               type="email"
               name="email"
               placeholder="E-mail"
-              onChange={handleChange}
+              value={email}
+              onChange={e => setEmail(e.target.value)}
             />
-          </label>
-          <label id={styles.password_label}>
-            Password
-            <input
-              id={styles.password}
-              required
-              type="password"
-              name="password"
+          </FormControl>
+
+          <FormControl fullWidth variant="outlined">
+          <InputLabel htmlFor="outlined-adornment-password"
               placeholder="password"
-              onChange={handleChange}
-            />
-          </label>
-        </form>
+              required
+          >Password</InputLabel>
+          <OutlinedInput
+            id="outlined-adornment-password"
+            type={showPassword ? 'text' : 'password'}
+            name="password"
+            placeholder="password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
+            label="Password"
+          />
+        </FormControl>
         <LoginButton
           disabled={!canLogin}
           onClick={() => {
             setCurrentUser({ name: firstName + " " + lastName  });
-            setEmail({ email: values.email });
-            setPassword({ password: values.password });
+            setEmail({ email: email });
+            setPassword({ password: password });
             navigate("/dashboard");
             login();
           }}
@@ -86,19 +123,23 @@ export function RegForm() {
           Sign Up
         </LoginButton>
         {!canLogin && <p>Please fill out all fields.</p>}
-        <div id={styles.last_name_label}>Already Registered?</div>
-        <button className={styles.btn}>
+        <CardActions>
+        <Typography variant="subtitle1" color='text.secondary' component='div'>Already Registered?</Typography>
+        <Button variant="outlined" size="small">
           <NavLink to="/login">Login</NavLink>
-        </button>
-      </div>
+        </Button>
+        </CardActions>
+          </Box>
+        </CardContent>
+      </Card>
     </>
   );
 }
 
 export function LoginButton({ children, onClick, disabled }) {
   return (
-    <button className={styles.btn} onClick={onClick} disabled={disabled}>
+    <Button variant="contained" onClick={onClick} disabled={disabled}>
       {children}
-    </button>
+    </Button>
   );
 }

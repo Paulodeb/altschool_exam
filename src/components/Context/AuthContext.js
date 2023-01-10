@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 
+
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const AuthContext = createContext({});
@@ -9,15 +10,18 @@ export const AuthContextProvider = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [LoggedIn, setLoggedIn] = useState(false);
-
+  
   const login = () => {
-    sleep(100).then(() => {
+   
       setLoggedIn(true);
-    });
-  };
+    };
+
   const logout = () => {
     sleep(100).then(() => {
       setLoggedIn(false);
+      setCurrentUser(null);
+      setEmail(null);
+      setPassword(null);
     });
   };
 
@@ -27,6 +31,8 @@ export const AuthContextProvider = (props) => {
     email,
     setEmail,
     password,
+    // handleChange,
+    // values,
     setPassword,
     login,
     logout,

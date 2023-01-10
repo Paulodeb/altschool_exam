@@ -4,6 +4,7 @@ import { Panel } from "../Registration/Register";
 import NewLogin from "./NewLogin";
 import { Helmet } from "react-helmet-async";
 
+
 function LoginPage() {
   const { LoggedIn } = useAuth();
 
@@ -17,6 +18,7 @@ function LoginPage() {
 
       <Panel>
         <NewLogin />
+        
       </Panel>
     </div>
   ) : (

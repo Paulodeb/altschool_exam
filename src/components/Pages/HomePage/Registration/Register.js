@@ -9,7 +9,7 @@ export default function Register() {
   return !LoggedIn ? (
     <>
       <Helmet>
-        <title>Register</title>
+        <title>Sign Up</title>
         <meta name="description" content="Register" />
         <link rel="canonical" href="/register" />
       </Helmet>
