@@ -1,6 +1,7 @@
 import React, { lazy, Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import styles from "./App";
+import "./App.css";
+import Navbar from "./components/Routes/navbar";
 
 const AuthRoutes = lazy(() => import("./components/Routes/AuthRouthes"));
 
@@ -10,8 +11,9 @@ function App() {
     <>
       <ErrorBoundary>
         <Suspense
-          fallback={<div className={styles.linespinner}>Loading...</div>}
+          fallback={<div className='linespinner'>Loading...</div>}
         >
+        <Navbar/>
           <AuthRoutes />
         </Suspense>
       </ErrorBoundary>
